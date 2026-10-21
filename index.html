@@ -34,21 +34,96 @@
   <meta name="twitter:description" content="Medí tu sueño, tu recuperación y tu esfuerzo todo el día, sin distracciones. Envío gratis a todo el país y 3 cuotas sin interés.">
   <meta name="twitter:image" content="https://starkecom.vercel.app/og.jpg">
   <script>
-    // Botones de compra: el primer clic agrega la pulsera y abre el carrito de Tiendanube.
-    // Si la persona vuelve a tocar "Comprar" dentro de las 24 h, abre el carrito sin sumar otra unidad.
-    window.addEventListener('click', function (e) {
-      var a = e.target && e.target.closest ? e.target.closest('a[href*="starkband.mitiendanube.com/cart-link/"], a[data-stark-buy]') : null;
-      if (!a) return;
-      var KEY = 'stark_cart_added_at', WINDOW_MS = 24 * 60 * 60 * 1000, now = Date.now(), last = 0;
-      try { last = parseInt(localStorage.getItem(KEY) || '0', 10) || 0; } catch (_) {}
-      a.setAttribute('data-stark-buy', '1');
-      if (last && now - last < WINDOW_MS) {
-        a.href = 'https://starkband.mitiendanube.com/comprar/';
-      } else {
-        a.href = 'https://starkband.mitiendanube.com/cart-link/1521860745-1';
-        try { localStorage.setItem(KEY, String(now)); } catch (_) {}
+    // Selector de cantidad: al tocar cualquier "Comprar" se abre un recuadro que arranca en 0.
+    // La persona suma de a 1 y recién ahí va al carrito de Tiendanube con esa cantidad exacta.
+    (function () {
+      var VARIANT = '1521860745', PRICE = 85000, MAX = 10;
+      var CART = 'https://starkband.mitiendanube.com/cart-link/';
+      var qty = 0, root = null, lastFocus = null;
+      function money(n) { return '$' + n.toLocaleString('es-AR'); }
+      var css = '' +
+        '#stark-qty{position:fixed;inset:0;z-index:2147483000;display:flex;align-items:center;justify-content:center;padding:16px;background:rgba(10,14,22,.72);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);opacity:0;transition:opacity .22s ease;font-family:"Archivo",system-ui,sans-serif;color:#eef1f5}' +
+        '#stark-qty.on{opacity:1}' +
+        '#stark-qty .sq-panel{position:relative;width:100%;max-width:440px;background:#1b2029;border:1px solid rgba(238,241,245,.18);box-shadow:0 30px 80px rgba(0,0,0,.55);transform:translateY(14px);transition:transform .26s cubic-bezier(.2,.8,.2,1)}' +
+        '#stark-qty.on .sq-panel{transform:none}' +
+        '#stark-qty .sq-top{height:4px;background:#2f6fe4}' +
+        '#stark-qty .sq-body{padding:28px 28px 24px}' +
+        '#stark-qty .sq-tag{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#7fa6f0;margin-bottom:10px}' +
+        '#stark-qty h3{font-weight:800;font-size:26px;line-height:1.1;letter-spacing:-.01em;margin:0 0 6px}' +
+        '#stark-qty .sq-sub{font-size:14px;color:rgba(238,241,245,.68);margin:0 0 24px}' +
+        '#stark-qty .sq-row{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:18px 0;border-top:1px solid rgba(238,241,245,.14);border-bottom:1px solid rgba(238,241,245,.14)}' +
+        '#stark-qty .sq-name{font-weight:800;font-size:15px}' +
+        '#stark-qty .sq-unit{font-family:"JetBrains Mono",monospace;font-size:12px;color:rgba(238,241,245,.6);margin-top:4px}' +
+        '#stark-qty .sq-step{display:flex;align-items:stretch;border:1px solid rgba(238,241,245,.22)}' +
+        '#stark-qty .sq-step button{width:44px;height:44px;background:transparent;border:0;color:#eef1f5;font-size:20px;font-weight:700;cursor:pointer;transition:background .15s}' +
+        '#stark-qty .sq-step button:hover:not(:disabled){background:rgba(47,111,228,.22)}' +
+        '#stark-qty .sq-step button:disabled{opacity:.3;cursor:not-allowed}' +
+        '#stark-qty .sq-n{min-width:48px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:18px;border-left:1px solid rgba(238,241,245,.22);border-right:1px solid rgba(238,241,245,.22);font-variant-numeric:tabular-nums}' +
+        '#stark-qty .sq-total{display:flex;align-items:baseline;justify-content:space-between;margin:20px 0 4px}' +
+        '#stark-qty .sq-total span:first-child{font-family:"JetBrains Mono",monospace;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:rgba(238,241,245,.6)}' +
+        '#stark-qty .sq-amt{font-weight:800;font-size:28px;font-variant-numeric:tabular-nums}' +
+        '#stark-qty .sq-note{font-size:12.5px;line-height:1.45;color:rgba(238,241,245,.6);margin:0 0 20px}' +
+        '#stark-qty .sq-go{display:flex;width:100%;align-items:center;justify-content:space-between;padding:16px 20px;background:#2f6fe4;color:#fff;border:0;font-family:inherit;font-weight:800;font-size:16px;cursor:pointer;transition:filter .15s,opacity .15s}' +
+        '#stark-qty .sq-go:hover:not(:disabled){filter:brightness(1.08)}' +
+        '#stark-qty .sq-go:disabled{opacity:.35;cursor:not-allowed}' +
+        '#stark-qty .sq-x{position:absolute;top:14px;right:14px;width:36px;height:36px;background:transparent;border:0;color:rgba(238,241,245,.7);font-size:22px;cursor:pointer}' +
+        '#stark-qty .sq-x:hover{color:#fff}' +
+        '#stark-qty button:focus-visible{outline:2px solid #7fa6f0;outline-offset:2px}' +
+        '@media (max-width:560px){#stark-qty{align-items:flex-end;padding:0}#stark-qty .sq-panel{max-width:none;transform:translateY(100%)}#stark-qty .sq-body{padding:24px 20px calc(20px + env(safe-area-inset-bottom))}#stark-qty h3{font-size:22px}}';
+      function build() {
+        var st = document.createElement('style'); st.textContent = css; document.head.appendChild(st);
+        root = document.createElement('div'); root.id = 'stark-qty';
+        root.setAttribute('role', 'dialog'); root.setAttribute('aria-modal', 'true'); root.setAttribute('aria-labelledby', 'sq-title');
+        root.innerHTML =
+          '<div class="sq-panel"><div class="sq-top"></div><button class="sq-x" type="button" aria-label="Cerrar">×</button><div class="sq-body">' +
+          '<div class="sq-tag">Tu compra</div><h3 id="sq-title">¿Cuántas pulseras querés?</h3>' +
+          '<p class="sq-sub">Sumá de a una. Después lo confirmás en el carrito.</p>' +
+          '<div class="sq-row"><div><div class="sq-name">Pulsera inteligente STARK</div><div class="sq-unit">' + money(PRICE) + ' c/u</div></div>' +
+          '<div class="sq-step"><button type="button" data-d="-1" aria-label="Quitar una">−</button><div class="sq-n" aria-live="polite">0</div><button type="button" data-d="1" aria-label="Sumar una">+</button></div></div>' +
+          '<div class="sq-total"><span>Subtotal</span><span class="sq-amt">$0</span></div>' +
+          '<p class="sq-note">Envío gratis a todo el país · 5% OFF por transferencia · 3 cuotas sin interés. Las promos se aplican en el carrito.</p>' +
+          '<button class="sq-go" type="button" disabled><span>Elegí al menos 1</span><span>→</span></button>' +
+          '</div></div>';
+        document.body.appendChild(root);
+        root.addEventListener('click', function (e) {
+          if (e.target === root || e.target.closest('.sq-x')) return close();
+          var b = e.target.closest('[data-d]'); if (b) { qty = Math.max(0, Math.min(MAX, qty + +b.getAttribute('data-d'))); render(); }
+          if (e.target.closest('.sq-go') && qty > 0) {
+            try { if (window.fbq) fbq('track', 'AddToCart', { value: qty * PRICE, currency: 'ARS', content_ids: [VARIANT], content_type: 'product', num_items: qty }); } catch (_) {}
+            window.open(CART + VARIANT + '-' + qty, '_blank', 'noopener');
+            close();
+          }
+        });
+        document.addEventListener('keydown', function (e) { if (root.classList.contains('on') && e.key === 'Escape') close(); });
       }
-    }, true);
+      function render() {
+        root.querySelector('.sq-n').textContent = qty;
+        root.querySelector('.sq-amt').textContent = money(qty * PRICE);
+        root.querySelector('[data-d="-1"]').disabled = qty === 0;
+        root.querySelector('[data-d="1"]').disabled = qty === MAX;
+        var go = root.querySelector('.sq-go'); go.disabled = qty === 0;
+        go.firstChild.textContent = qty === 0 ? 'Elegí al menos 1' : 'Ir al carrito';
+      }
+      function open() {
+        if (!root) build();
+        qty = 0; render(); lastFocus = document.activeElement;
+        root.style.display = 'flex'; document.documentElement.style.overflow = 'hidden';
+        requestAnimationFrame(function () { root.classList.add('on'); });
+        setTimeout(function () { root.querySelector('[data-d="1"]').focus(); }, 60);
+      }
+      function close() {
+        root.classList.remove('on'); document.documentElement.style.overflow = '';
+        setTimeout(function () { if (!root.classList.contains('on')) root.style.display = 'none'; }, 240);
+        if (lastFocus && lastFocus.focus) lastFocus.focus();
+      }
+      window.addEventListener('click', function (e) {
+        var a = e.target && e.target.closest ? e.target.closest('a[href*="starkband.mitiendanube.com/cart-link/"], a[data-stark-buy]') : null;
+        if (!a) return;
+        e.preventDefault(); e.stopPropagation();
+        a.setAttribute('data-stark-buy', '1');
+        open();
+      }, true);
+    })();
   </script>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
