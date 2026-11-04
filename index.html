@@ -73,6 +73,36 @@ a:hover{color:#b9cffa}
 <template id="__bundler_thumbnail"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="#0d2247"></rect><text x="50" y="62" text-anchor="middle" font-family="Archivo, sans-serif" font-weight="800" font-size="34" fill="#ffffff">S</text></svg></template>
 <div style="font-family:var(--font-body);color:var(--color-text);background:var(--color-bg);min-height:100vh">
 
+<sc-if value="{{ cyberOn }}" hint-placeholder-val="{{ true }}">
+<section data-screen-label="Cyber Monday" aria-label="Cyber Monday" style="background:#0b1733;color:#f2f4f7;border-bottom:2px solid #c6ff3d">
+<sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ true }}">
+<a href="https://starkband.mitiendanube.com/cart-link/1521860745-1" onClick="{{ openBuy }}" aria-label="Cyber Monday: 2da pulsera al 30% OFF, 3ra al 40% OFF, 6 cuotas sin interés. Comprar ahora" style="display:block;max-width:1920px;margin:0 auto">
+<img src="assets/cyber-banner.png" alt="Cyber Monday STARK: hasta 40% OFF. Llevando 2 pulseras la 2da al 30% OFF, llevando 3 la 3ra al 40% OFF. 10% OFF en la web, 5% OFF extra por transferencia, 6 cuotas sin interés." style="display:block;width:100%;height:auto">
+</a>
+</sc-if>
+<sc-if value="{{ isMobile }}" hint-placeholder-val="{{ false }}">
+<a href="https://starkband.mitiendanube.com/cart-link/1521860745-1" onClick="{{ openBuy }}" style="display:flex;flex-direction:column;gap:16px;padding:28px 20px 20px;color:inherit;text-decoration:none">
+<div style="display:flex;align-items:center;gap:12px"><span style="font-family:var(--font-heading);font-weight:800;font-size:18px;letter-spacing:0.14em">STARK</span><span style="background:#c6ff3d;color:#0b1733;font-size:11px;font-weight:800;letter-spacing:0.14em;padding:5px 10px">CYBER MONDAY</span></div>
+<div style="font-family:var(--font-heading);font-weight:900;font-size:44px;line-height:0.95;letter-spacing:-0.02em;text-transform:uppercase">Cyber Monday<br><span style="color:#c6ff3d">Hasta 40% OFF</span></div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+<div style="border:2px solid #24407a;background:#12244a;padding:12px;display:flex;flex-direction:column;gap:4px"><span style="font-size:10px;font-weight:800;letter-spacing:0.12em;color:#c6ff3d">LLEVANDO 2</span><span style="font-family:var(--font-heading);font-weight:900;font-size:22px;line-height:1">LA 2ª AL 30% OFF</span></div>
+<div style="background:#c6ff3d;color:#0b1733;padding:12px;display:flex;flex-direction:column;gap:4px"><span style="font-size:10px;font-weight:800;letter-spacing:0.12em">LLEVANDO 3</span><span style="font-family:var(--font-heading);font-weight:900;font-size:22px;line-height:1">LA 3ª AL 40% OFF</span></div>
+</div>
+<div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px">
+<div style="border-top:2px solid #c6ff3d;padding-top:8px"><div style="font-family:var(--font-heading);font-weight:900;font-size:17px">10% OFF</div><div style="font-size:11px;opacity:0.8">en la web</div></div>
+<div style="border-top:2px solid #c6ff3d;padding-top:8px"><div style="font-family:var(--font-heading);font-weight:900;font-size:17px">+5% OFF</div><div style="font-size:11px;opacity:0.8">por transferencia</div></div>
+<div style="border-top:2px solid #c6ff3d;padding-top:8px"><div style="font-family:var(--font-heading);font-weight:900;font-size:17px">6 cuotas</div><div style="font-size:11px;opacity:0.8">sin interés</div></div>
+</div>
+<span style="display:flex;justify-content:space-between;align-items:center;background:#f2f4f7;color:#0b1733;font-weight:800;letter-spacing:0.1em;font-size:14px;padding:14px 18px;min-height:44px">COMPRAR AHORA <span>→</span></span>
+</a>
+</sc-if>
+<div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:12px 20px;padding:14px 20px;border-top:2px solid #1c2f5c">
+<span style="font-size:12px;font-weight:800;letter-spacing:0.16em;color:#c6ff3d">TERMINA EN</span>
+{{ cyberCountdown }}
+<span style="font-size:13px;opacity:0.85">6 cuotas sin interés con tarjetas adheridas</span>
+</div>
+</section>
+</sc-if>
 <sc-if value="{{ showPromo }}" hint-placeholder-val="{{ true }}">
 <div style="background:var(--color-accent);color:#fff;padding:10px 0;overflow:hidden;font-size:13px;font-weight:600;letter-spacing:0.02em;white-space:nowrap">{{ marquee }}</div>
 </sc-if>
@@ -88,7 +118,7 @@ a:hover{color:#b9cffa}
 <a href="#faq" style="color:inherit;text-decoration:none">Preguntas</a>
 </nav>
 </sc-if>
-<a class="btn btn-primary" href="https://starkband.mitiendanube.com/cart-link/1521860745-1" style="white-space:nowrap">Comprar</a>
+<a class="btn btn-primary" href="https://starkband.mitiendanube.com/cart-link/1521860745-1" onClick="{{ openBuy }}" style="white-space:nowrap">Comprar</a>
 <sc-if value="{{ isMobile }}" hint-placeholder-val="{{ false }}">
 <button onClick="{{ toggleMenu }}" aria-label="Menú" style="width:44px;height:44px;border:2px solid var(--color-text);background:transparent;color:var(--color-text);display:flex;flex-direction:column;justify-content:center;align-items:center;gap:5px;cursor:pointer;padding:0">
 <span style="width:20px;height:2px;background:currentColor;display:block"></span>
@@ -114,8 +144,8 @@ a:hover{color:#b9cffa}
 <div style="display:flex;flex-direction:column;gap:24px;max-width:460px">
 <p style="font-size:18px;line-height:1.5;margin:0;text-wrap:pretty">Medí tu sueño, tu recuperación y tu esfuerzo todo el día, sin distracciones. La pulsera toma los datos y la app te dice qué hacer con ellos.</p>
 <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center">
-<a class="btn btn-primary" href="https://starkband.mitiendanube.com/cart-link/1521860745-1" style="padding:14px 20px;font-size:16px;min-width:220px;justify-content:space-between">Comprar — $85.000 <span>→</span></a>
-<div style="font-size:13px;line-height:1.35">5% OFF por transferencia<br>o 3 cuotas sin interés</div>
+<a class="btn btn-primary" href="https://starkband.mitiendanube.com/cart-link/1521860745-1" onClick="{{ openBuy }}" style="padding:14px 20px;font-size:16px;min-width:220px;justify-content:space-between">Comprar — $85.000 <span>→</span></a>
+<div style="font-size:13px;line-height:1.35">5% OFF por transferencia<br><sc-if value="{{ cyberOff }}" hint-placeholder-val="{{ false }}">o 3 cuotas sin interés</sc-if><sc-if value="{{ cyberOn }}" hint-placeholder-val="{{ true }}">o <strong>6 cuotas sin interés</strong> de $14.166,67</sc-if></div>
 </div>
 </div>
 </div><div style="display:flex;align-items:center;justify-content:center;min-height:420px">
@@ -301,7 +331,8 @@ a:hover{color:#b9cffa}
 <div style="display:flex;flex-direction:column;font-size:14px"><s style="opacity:0.55">$94.444</s><span style="color:var(--color-accent-700);font-weight:600">10% OFF en la web</span></div>
 </div>
 <div style="display:flex;flex-direction:column;gap:6px;font-size:15px">
-<div>o <strong>3 cuotas sin interés</strong></div>
+<sc-if value="{{ cyberOff }}" hint-placeholder-val="{{ false }}"><div>o <strong>3 cuotas sin interés</strong></div></sc-if>
+<sc-if value="{{ cyberOn }}" hint-placeholder-val="{{ true }}"><div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap"><span style="background:#0b1733;color:#c6ff3d;font-size:11px;font-weight:800;letter-spacing:0.12em;padding:4px 8px">CYBER MONDAY</span><span>o <strong>6 cuotas sin interés de $14.166,67</strong></span></div></sc-if>
 <div>o <strong>$80.750 por transferencia</strong> <span style="color:var(--color-accent-700);font-weight:600">(5% OFF)</span></div>
 </div>
 <div style="display:flex;flex-direction:column;gap:10px;border-top:2px solid var(--color-divider);padding-top:20px">
@@ -319,7 +350,12 @@ a:hover{color:#b9cffa}
 <div style="padding:10px 0;border-bottom:1px solid var(--color-divider);font-size:15px;display:flex;gap:10px"><span style="color:var(--color-accent)">✓</span>{{ i }}</div>
 </sc-for>
 </div>
-<a class="btn btn-primary" href="https://starkband.mitiendanube.com/cart-link/1521860745-1" style="padding:16px 20px;font-size:17px;justify-content:space-between">Comprar ahora <span>→</span></a>
+<a class="btn btn-primary" href="https://starkband.mitiendanube.com/cart-link/1521860745-1" onClick="{{ openBuy }}" style="padding:16px 20px;font-size:17px;justify-content:space-between">Comprar ahora <span>→</span></a>
+<sc-if value="{{ cyberOn }}" hint-placeholder-val="{{ true }}">
+<div style="display:flex;flex-direction:column;gap:6px;background:#0b1733;color:#f2f4f7;padding:14px 16px;font-size:13px;line-height:1.4">
+<div><strong style="color:#c6ff3d">Cyber Monday:</strong> 6 cuotas sin interés con tarjetas adheridas · 2da pulsera al 30% OFF · 3ra al 40% OFF</div>
+</div>
+</sc-if>
 </div>
 </section>
 
@@ -429,14 +465,14 @@ a:hover{color:#b9cffa}
 <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));background:#0d2247;border-bottom:2px solid rgba(242,244,247,0.18)">
 <div style="padding:24px;display:flex;align-items:center;gap:14px;border-right:2px solid rgba(242,244,247,0.18)"><span style="font-size:32px">🚚</span><div><div style="font-family:var(--font-heading);font-weight:800;font-size:17px">Envío gratis</div><div style="font-size:13px;opacity:0.75">A todo el país</div></div></div>
 <div style="padding:24px;display:flex;align-items:center;gap:14px;border-right:2px solid rgba(242,244,247,0.18)"><span style="font-size:32px">🛡️</span><div><div style="font-family:var(--font-heading);font-weight:800;font-size:17px">30 días de garantía</div><div style="font-size:13px;opacity:0.75">10 días si ya la usaste</div></div></div>
-<div style="padding:24px;display:flex;align-items:center;gap:14px;border-right:2px solid rgba(242,244,247,0.18)"><span style="font-size:32px">💳</span><div><div style="font-family:var(--font-heading);font-weight:800;font-size:17px">3 cuotas sin interés</div><div style="font-size:13px;opacity:0.75">Pagá como quieras</div></div></div>
+<div style="padding:24px;display:flex;align-items:center;gap:14px;border-right:2px solid rgba(242,244,247,0.18)"><span style="font-size:32px">💳</span><div><div style="font-family:var(--font-heading);font-weight:800;font-size:17px">{{ cuotasN }} cuotas sin interés</div><div style="font-size:13px;opacity:0.75">Pagá como quieras</div></div></div>
 <div style="padding:24px;display:flex;align-items:center;gap:14px"><span style="font-size:32px">🔥</span><div><div style="font-family:var(--font-heading);font-weight:800;font-size:17px">10% OFF en la web</div><div style="font-size:13px;opacity:0.75">Comprando online</div></div></div>
 </div>
 <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr))">
 <div style="padding:48px 24px;display:flex;flex-direction:column;gap:20px;border-right:2px solid rgba(242,244,247,0.12)">
 <div style="font-family:'Instrument Serif',serif;font-style:italic;font-size:36px;line-height:1.1;text-wrap:balance">Tu salud, 24/7, sin pantallas. ⚡</div>
 <p style="margin:0;font-size:15px;opacity:0.75;max-width:320px">Dormí mejor, recuperate mejor y entrená con datos reales. Hecho para vos, desde Argentina.</p>
-<a class="btn btn-primary" href="https://starkband.mitiendanube.com/cart-link/1521860745-1" style="padding:14px 18px;font-size:15px;justify-content:space-between;max-width:280px">🛒 Comprar ahora <span>→</span></a>
+<a class="btn btn-primary" href="https://starkband.mitiendanube.com/cart-link/1521860745-1" onClick="{{ openBuy }}" style="padding:14px 18px;font-size:15px;justify-content:space-between;max-width:280px">🛒 Comprar ahora <span>→</span></a>
 </div>
 <div style="padding:48px 24px;display:flex;flex-direction:column;gap:6px;border-right:2px solid rgba(242,244,247,0.12)">
 <div style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;color:#85aaf1;margin-bottom:8px">Explorá</div>
@@ -455,7 +491,7 @@ a:hover{color:#b9cffa}
 <div style="padding:48px 24px;display:flex;flex-direction:column;gap:6px">
 <div style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;color:#85aaf1;margin-bottom:8px">Seguinos</div>
 <a href="https://instagram.com/stark.ecom" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:12px;color:#f2f4f7;text-decoration:none;font-size:16px;padding:10px 0;border-bottom:1px solid rgba(242,244,247,0.12)" style-hover="color:#85aaf1;padding-left:6px"><span style="font-size:20px">📸</span>@stark.ecom</a>
-<a href="https://starkband.mitiendanube.com/cart-link/1521860745-1" style="display:flex;align-items:center;gap:12px;color:#f2f4f7;text-decoration:none;font-size:16px;padding:10px 0;border-bottom:1px solid rgba(242,244,247,0.12)" style-hover="color:#85aaf1;padding-left:6px"><span style="font-size:20px">🛍️</span>Tienda online</a>
+<a href="https://starkband.mitiendanube.com/cart-link/1521860745-1" onClick="{{ openBuy }}" style="display:flex;align-items:center;gap:12px;color:#f2f4f7;text-decoration:none;font-size:16px;padding:10px 0;border-bottom:1px solid rgba(242,244,247,0.12)" style-hover="color:#85aaf1;padding-left:6px"><span style="font-size:20px">🛍️</span>Tienda online</a>
 <div style="margin-top:16px;padding:16px;background:#262c37;display:flex;gap:12px;align-items:center"><span style="font-size:26px">📦</span><div style="font-size:14px;line-height:1.4">Mostranos tu STARK en Instagram y etiquetanos 🙌</div></div>
 </div>
 </div>
@@ -466,9 +502,141 @@ a:hover{color:#b9cffa}
 <span>© 2026 STARK · Pulsera inteligente</span>
 </div>
 </footer>
+<sc-if value="{{ buyOpen }}" hint-placeholder-val="{{ false }}">
+<div role="dialog" aria-modal="true" aria-label="Elegí cuántas pulseras" onClick="{{ closeBuyBg }}" style="position:fixed;inset:0;z-index:1000;background:rgba(5,10,22,0.72);display:flex;align-items:center;justify-content:center;padding:16px">
+<div style="width:100%;max-width:480px;max-height:calc(100vh - 32px);overflow-y:auto;background:var(--color-bg);color:var(--color-text);border:2px solid var(--color-divider);display:flex;flex-direction:column">
+<div style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:20px 20px 16px;border-bottom:2px solid var(--color-divider)">
+<div style="display:flex;flex-direction:column;gap:4px">
+<sc-if value="{{ cyberOn }}" hint-placeholder-val="{{ true }}"><span style="align-self:flex-start;background:#c6ff3d;color:#0b1733;font-size:11px;font-weight:800;letter-spacing:0.12em;padding:4px 8px">CYBER MONDAY</span></sc-if>
+<h3 style="font-family:var(--font-heading);font-weight:800;font-size:24px;letter-spacing:-0.02em;margin:0">¿Cuántas pulseras querés?</h3>
+</div>
+<button onClick="{{ closeBuy }}" aria-label="Cerrar" style="flex:none;width:44px;height:44px;border:2px solid var(--color-divider);background:transparent;color:inherit;font-size:20px;line-height:1;cursor:pointer;font-family:inherit">✕</button>
+</div>
+<div style="display:flex;flex-direction:column;gap:10px;padding:20px">
+<sc-for list="{{ buyOpts }}" as="o" hint-placeholder-count="3">
+<button onClick="{{ o.pick }}" aria-pressed="{{ o.on }}" style="position:relative;text-align:left;cursor:pointer;padding:16px;background:{{ o.bg }};border:2px solid {{ o.ring }};color:inherit;font-family:inherit;display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:4px 12px;min-height:44px">
+<sc-if value="{{ o.badge }}" hint-placeholder-val="{{ false }}"><span style="position:absolute;top:-11px;right:12px;background:#1f62d8;color:#fff;font-size:11px;font-weight:700;letter-spacing:0.08em;padding:3px 8px">MÁS ELEGIDA</span></sc-if>
+<span style="font-size:16px;font-weight:700">{{ o.label }}</span>
+<span style="font-family:var(--font-heading);font-weight:800;font-size:22px;letter-spacing:-0.02em;text-align:right">{{ o.price }}</span>
+<span style="font-size:12px;font-weight:600;color:#85aaf1">{{ o.save }}</span>
+<s style="font-size:13px;opacity:0.55;text-align:right">{{ o.old }}</s>
+</button>
+</sc-for>
+</div>
+<div style="display:flex;flex-direction:column;gap:10px;padding:0 20px 20px">
+<a class="btn btn-primary" href="{{ buyUrl }}" style="padding:16px 20px;font-size:17px;justify-content:space-between;min-height:44px"><span>Ir al carrito — {{ buyTotal }}</span><span>→</span></a>
+<div style="font-size:13px;opacity:0.8;line-height:1.4">{{ buyCuotas }}</div>
+</div>
+</div>
+</div>
+</sc-if>
+<sc-if value="{{ cyOpen }}" hint-placeholder-val="{{ false }}">
+<sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ true }}">
+<div role="dialog" aria-modal="true" aria-label="Regalo Cyber Monday" onClick="{{ cyCloseBg }}" style="position:fixed;inset:0;z-index:999;background:rgba(5,10,22,0.72);display:flex;align-items:center;justify-content:center;padding:24px">
+<div style="width:100%;max-width:820px;background:#0b1733;color:#f2f4f7;border:2px solid #c6ff3d;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr)">
+<div style="display:flex;flex-direction:column;gap:16px;padding:{{ cyPad }};min-width:0">
+<div style="display:flex;align-items:center;justify-content:space-between;gap:12px">
+<span style="display:flex;align-items:center;gap:8px;background:#c6ff3d;color:#0b1733;font-size:11px;font-weight:800;letter-spacing:0.14em;padding:5px 10px"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="8" width="18" height="4"></rect><path d="M12 8v13"></path><path d="M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7"></path><path d="M7.5 8a2.5 2.5 0 0 1 0-5C10 3 12 8 12 8s2-5 4.5-5a2.5 2.5 0 0 1 0 5"></path></svg>CYBER MONDAY</span>
+<button onClick="{{ cyClose }}" aria-label="Cerrar" style="flex:none;width:44px;height:44px;border:2px solid rgba(242,244,247,0.25);background:transparent;color:inherit;font-size:18px;line-height:1;cursor:pointer;font-family:inherit">✕</button>
+</div>
+<sc-if value="{{ cyS1 }}" hint-placeholder-val="{{ true }}">
+<div style="display:flex;flex-direction:column;gap:10px">
+<div style="font-size:12px;font-weight:800;letter-spacing:0.16em;color:#c6ff3d">TENÉS UN REGALO</div>
+<h3 style="font-family:var(--font-heading);font-weight:900;font-size:{{ cyH }};line-height:1;letter-spacing:-0.02em;margin:0">Tu código Cyber te está esperando.</h3>
+<p style="margin:0;font-size:15px;line-height:1.45;opacity:0.85;text-wrap:pretty">Un descuento exclusivo para tu STARK{{ cyGiftTxt }}, solo por Cyber Monday.</p>
+</div>
+<button onClick="{{ cyNext }}" style="display:flex;justify-content:space-between;align-items:center;gap:12px;width:100%;min-height:52px;padding:14px 18px;background:#1f62d8;color:#fff;border:none;font-family:inherit;font-weight:800;font-size:15px;letter-spacing:0.08em;cursor:pointer" style-hover="background:#2f6fe4"><span>QUIERO MI REGALO</span><span>→</span></button>
+<button onClick="{{ cyClose }}" style="align-self:flex-start;background:transparent;border:none;color:inherit;opacity:0.7;font-family:inherit;font-size:14px;text-decoration:underline;cursor:pointer;padding:10px 0;min-height:44px">Ahora no</button>
+</sc-if>
+<sc-if value="{{ cyS2 }}" hint-placeholder-val="{{ false }}">
+<div style="display:flex;flex-direction:column;gap:10px">
+<div style="font-size:12px;font-weight:800;letter-spacing:0.16em;color:#c6ff3d">UN PASO MÁS Y ES TUYO</div>
+<h3 style="font-family:var(--font-heading);font-weight:900;font-size:{{ cyH }};line-height:1;letter-spacing:-0.02em;margin:0">Dejanos tu email y recibí tu código.</h3>
+</div>
+<form onSubmit="{{ cySubmit }}" style="display:flex;flex-direction:column;gap:10px;margin:0">
+<label style="display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:600">Tu email
+<input type="email" inputmode="email" autocomplete="email" required="" placeholder="tu@email.com" value="{{ cyEmail }}" onChange="{{ cyEmailChange }}" style="width:100%;box-sizing:border-box;min-height:52px;padding:12px 14px;border:2px solid {{ cyEmailRing }};background:#f2f4f7;color:#0b1733;font-family:inherit;font-size:16px;border-radius:0"></label>
+<sc-if value="{{ cyErr }}" hint-placeholder-val="{{ false }}"><div role="alert" style="font-size:13px;color:#ff8f7a;font-weight:600">Revisá el email: parece que falta algo.</div></sc-if>
+<button type="submit" style="display:flex;justify-content:space-between;align-items:center;gap:12px;width:100%;min-height:52px;padding:14px 18px;background:#1f62d8;color:#fff;border:none;font-family:inherit;font-weight:800;font-size:15px;letter-spacing:0.08em;cursor:pointer" style-hover="background:#2f6fe4"><span>{{ cyBtnTxt }}</span><span>→</span></button>
+</form>
+<button onClick="{{ cyClose }}" style="align-self:flex-start;background:transparent;border:none;color:inherit;opacity:0.7;font-family:inherit;font-size:14px;text-decoration:underline;cursor:pointer;padding:10px 0;min-height:44px">Seguir sin descuento</button>
+</sc-if>
+<sc-if value="{{ cyS3 }}" hint-placeholder-val="{{ false }}">
+<div style="display:flex;flex-direction:column;gap:10px">
+<div style="font-size:12px;font-weight:800;letter-spacing:0.16em;color:#c6ff3d">¡LISTO! ESTE ES TU CÓDIGO</div>
+<div style="display:flex;align-items:stretch;border:2px dashed #c6ff3d">
+<span style="flex:1;display:flex;align-items:center;padding:12px 16px;font-family:'JetBrains Mono',monospace;font-size:24px;font-weight:700;letter-spacing:0.12em;color:#c6ff3d">{{ cyCode }}</span>
+<button onClick="{{ cyCopy }}" style="flex:none;min-width:96px;min-height:52px;border:none;border-left:2px dashed #c6ff3d;background:transparent;color:#f2f4f7;font-family:inherit;font-weight:700;font-size:14px;cursor:pointer">{{ cyCopyTxt }}</button>
+</div>
+<p style="margin:0;font-size:14px;line-height:1.45;opacity:0.85">Ingresalo en el carrito, en "Cupón de descuento", antes de pagar.</p>
+</div>
+<button onClick="{{ cyBuy }}" style="display:flex;justify-content:space-between;align-items:center;gap:12px;width:100%;min-height:52px;padding:14px 18px;background:#1f62d8;color:#fff;border:none;font-family:inherit;font-weight:800;font-size:15px;letter-spacing:0.08em;cursor:pointer" style-hover="background:#2f6fe4"><span>COMPRAR AHORA</span><span>→</span></button>
+</sc-if>
+</div>
+<div style="position:relative;min-height:380px;background:radial-gradient(circle at 50% 50%, #3d64ad 0%, #1d3a70 45%, #0d2247 85%);border-left:2px solid #c6ff3d;overflow:hidden">
+<img src="assets/t/stark-hero-v2.webp" alt="Pulsera STARK" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;padding:24px;box-sizing:border-box">
+</div>
+</div>
+</div>
+</sc-if>
+<sc-if value="{{ isMobile }}" hint-placeholder-val="{{ false }}">
+<div role="dialog" aria-label="Regalo Cyber Monday" style="position:fixed;left:0;right:0;bottom:0;z-index:999;background:#0b1733;color:#f2f4f7;border-top:2px solid #c6ff3d;box-shadow:0 -8px 32px rgba(0,0,0,0.4);max-height:85vh;overflow-y:auto">
+<div style="display:flex;flex-direction:column;gap:16px;padding:{{ cyPad }};min-width:0">
+<div style="display:flex;align-items:center;justify-content:space-between;gap:12px">
+<span style="display:flex;align-items:center;gap:8px;background:#c6ff3d;color:#0b1733;font-size:11px;font-weight:800;letter-spacing:0.14em;padding:5px 10px"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="8" width="18" height="4"></rect><path d="M12 8v13"></path><path d="M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7"></path><path d="M7.5 8a2.5 2.5 0 0 1 0-5C10 3 12 8 12 8s2-5 4.5-5a2.5 2.5 0 0 1 0 5"></path></svg>CYBER MONDAY</span>
+<button onClick="{{ cyClose }}" aria-label="Cerrar" style="flex:none;width:44px;height:44px;border:2px solid rgba(242,244,247,0.25);background:transparent;color:inherit;font-size:18px;line-height:1;cursor:pointer;font-family:inherit">✕</button>
+</div>
+<sc-if value="{{ cyS1 }}" hint-placeholder-val="{{ true }}">
+<div style="display:flex;flex-direction:column;gap:10px">
+<div style="font-size:12px;font-weight:800;letter-spacing:0.16em;color:#c6ff3d">TENÉS UN REGALO</div>
+<h3 style="font-family:var(--font-heading);font-weight:900;font-size:{{ cyH }};line-height:1;letter-spacing:-0.02em;margin:0">Tu código Cyber te está esperando.</h3>
+<p style="margin:0;font-size:15px;line-height:1.45;opacity:0.85;text-wrap:pretty">Un descuento exclusivo para tu STARK{{ cyGiftTxt }}, solo por Cyber Monday.</p>
+</div>
+<button onClick="{{ cyNext }}" style="display:flex;justify-content:space-between;align-items:center;gap:12px;width:100%;min-height:52px;padding:14px 18px;background:#1f62d8;color:#fff;border:none;font-family:inherit;font-weight:800;font-size:15px;letter-spacing:0.08em;cursor:pointer" style-hover="background:#2f6fe4"><span>QUIERO MI REGALO</span><span>→</span></button>
+<button onClick="{{ cyClose }}" style="align-self:flex-start;background:transparent;border:none;color:inherit;opacity:0.7;font-family:inherit;font-size:14px;text-decoration:underline;cursor:pointer;padding:10px 0;min-height:44px">Ahora no</button>
+</sc-if>
+<sc-if value="{{ cyS2 }}" hint-placeholder-val="{{ false }}">
+<div style="display:flex;flex-direction:column;gap:10px">
+<div style="font-size:12px;font-weight:800;letter-spacing:0.16em;color:#c6ff3d">UN PASO MÁS Y ES TUYO</div>
+<h3 style="font-family:var(--font-heading);font-weight:900;font-size:{{ cyH }};line-height:1;letter-spacing:-0.02em;margin:0">Dejanos tu email y recibí tu código.</h3>
+</div>
+<form onSubmit="{{ cySubmit }}" style="display:flex;flex-direction:column;gap:10px;margin:0">
+<label style="display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:600">Tu email
+<input type="email" inputmode="email" autocomplete="email" required="" placeholder="tu@email.com" value="{{ cyEmail }}" onChange="{{ cyEmailChange }}" style="width:100%;box-sizing:border-box;min-height:52px;padding:12px 14px;border:2px solid {{ cyEmailRing }};background:#f2f4f7;color:#0b1733;font-family:inherit;font-size:16px;border-radius:0"></label>
+<sc-if value="{{ cyErr }}" hint-placeholder-val="{{ false }}"><div role="alert" style="font-size:13px;color:#ff8f7a;font-weight:600">Revisá el email: parece que falta algo.</div></sc-if>
+<button type="submit" style="display:flex;justify-content:space-between;align-items:center;gap:12px;width:100%;min-height:52px;padding:14px 18px;background:#1f62d8;color:#fff;border:none;font-family:inherit;font-weight:800;font-size:15px;letter-spacing:0.08em;cursor:pointer" style-hover="background:#2f6fe4"><span>{{ cyBtnTxt }}</span><span>→</span></button>
+</form>
+<button onClick="{{ cyClose }}" style="align-self:flex-start;background:transparent;border:none;color:inherit;opacity:0.7;font-family:inherit;font-size:14px;text-decoration:underline;cursor:pointer;padding:10px 0;min-height:44px">Seguir sin descuento</button>
+</sc-if>
+<sc-if value="{{ cyS3 }}" hint-placeholder-val="{{ false }}">
+<div style="display:flex;flex-direction:column;gap:10px">
+<div style="font-size:12px;font-weight:800;letter-spacing:0.16em;color:#c6ff3d">¡LISTO! ESTE ES TU CÓDIGO</div>
+<div style="display:flex;align-items:stretch;border:2px dashed #c6ff3d">
+<span style="flex:1;display:flex;align-items:center;padding:12px 16px;font-family:'JetBrains Mono',monospace;font-size:24px;font-weight:700;letter-spacing:0.12em;color:#c6ff3d">{{ cyCode }}</span>
+<button onClick="{{ cyCopy }}" style="flex:none;min-width:96px;min-height:52px;border:none;border-left:2px dashed #c6ff3d;background:transparent;color:#f2f4f7;font-family:inherit;font-weight:700;font-size:14px;cursor:pointer">{{ cyCopyTxt }}</button>
+</div>
+<p style="margin:0;font-size:14px;line-height:1.45;opacity:0.85">Ingresalo en el carrito, en "Cupón de descuento", antes de pagar.</p>
+</div>
+<button onClick="{{ cyBuy }}" style="display:flex;justify-content:space-between;align-items:center;gap:12px;width:100%;min-height:52px;padding:14px 18px;background:#1f62d8;color:#fff;border:none;font-family:inherit;font-weight:800;font-size:15px;letter-spacing:0.08em;cursor:pointer" style-hover="background:#2f6fe4"><span>COMPRAR AHORA</span><span>→</span></button>
+</sc-if>
+</div>
+</div>
+</sc-if>
+</sc-if>
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;showPromo&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;}}">
+<script type="text/x-dc" data-dc-script data-props="{&quot;showPromo&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;},&quot;cyberMode&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;auto&quot;,&quot;on&quot;,&quot;off&quot;],&quot;default&quot;:&quot;auto&quot;,&quot;tsType&quot;:&quot;'auto'|'on'|'off'&quot;,&quot;section&quot;:&quot;Cyber Monday&quot;},&quot;cyberCode&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;CYBERSTARK&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Cartel de regalo&quot;},&quot;cyberGift&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Cartel de regalo&quot;},&quot;leadEndpoint&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Cartel de regalo&quot;}}">
+const CYBER_END = Date.UTC(2026, 10, 7, 3, 0, 0); // 7/11/2026 00:00 hora Argentina
+const CyberCountdown = ({ end, onEnd }) => {
+  const [t, setT] = React.useState(() => end - Date.now());
+  React.useEffect(() => { const id = setInterval(() => { const r = end - Date.now(); setT(r); if (r <= 0) { clearInterval(id); onEnd && onEnd(); } }, 1000); return () => clearInterval(id); }, [end]);
+  const r = Math.max(0, t), d = Math.floor(r / 864e5), hh = Math.floor(r / 36e5) % 24, mm = Math.floor(r / 6e4) % 60, ss = Math.floor(r / 1e3) % 60;
+  const p = n => String(n).padStart(2, '0');
+  const box = (v, l) => React.createElement('span', { key: l, style: { display: 'flex', flexDirection: 'column', alignItems: 'center', minWidth: 48, padding: '6px 8px', background: '#c6ff3d', color: '#0b1733' } },
+    React.createElement('span', { style: { fontFamily: 'var(--font-heading)', fontWeight: 900, fontSize: 22, lineHeight: 1, fontVariantNumeric: 'tabular-nums' } }, v),
+    React.createElement('span', { style: { fontSize: 9, fontWeight: 800, letterSpacing: '0.12em', marginTop: 3 } }, l));
+  return React.createElement('span', { role: 'timer', 'aria-label': 'Tiempo restante de Cyber Monday', style: { display: 'flex', gap: 6 } }, box(p(d), 'DÍAS'), box(p(hh), 'HS'), box(p(mm), 'MIN'), box(p(ss), 'SEG'));
+};
 const A = (() => { let map = null; return p => { if (!map) { const el = typeof document !== 'undefined' && document.querySelector('[data-stark-assets]'); if (!el) return p; map = {}; el.querySelectorAll('img[data-a]').forEach(i => { map[i.getAttribute('data-a')] = i.getAttribute('src'); }); } return map[p] || p; }; })();
 class Component extends DCLogic {
   state = { color: 0, faq: 0, email: '', subscribed: false, w: typeof window !== 'undefined' ? window.innerWidth : 1200, menu: false };
@@ -480,6 +648,20 @@ class Component extends DCLogic {
   appScroll = (e) => { const el = e.currentTarget; const a = el.querySelectorAll('article'); if (a.length < 2 || this._appLock) return;
     if (el.scrollLeft + el.clientWidth >= el.scrollWidth - 4) return;
     const w = a[1].offsetLeft - a[0].offsetLeft; const p = Math.round(el.scrollLeft / w); if (p !== (this.state.app || 0)) this.setState({ app: p }); };
+  isCyber() { const m = this.props.cyberMode || 'auto'; return m === 'on' || (m === 'auto' && Date.now() < CYBER_END); }
+  async cySave() {
+    const email = (this.state.cyEmail || '').trim();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) { this.setState({ cyErr: true }); return; }
+    this.setState({ cySending: true });
+    const lead = { email, fecha: new Date().toISOString(), origen: 'popup-cyber' };
+    try { const k = 'stark-cyber-leads'; const a = JSON.parse(localStorage.getItem(k) || '[]'); a.push(lead); localStorage.setItem(k, JSON.stringify(a)); } catch (_) {}
+    const url = this.props.leadEndpoint || 'https://script.google.com/macros/s/AKfycbwxgndW5e0pcU3I6ykSTVAMUUs7tl-jtMieDHEzkrSZBxC11AW1xNOKZ5QjBUQyhXOr/exec';
+    if (url) { try {
+      if (url.includes('script.google.com')) await fetch(url, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(lead) });
+      else await fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' }, body: JSON.stringify(lead) });
+    } catch (_) {} }
+    this.setState({ cySending: false, cyStep: 3 });
+  }
   galData() {
     // Fotos por color (índice 0 Negro, 1 Azul, 2 Rosa). Para sumar fotos: agregar el <img> en la galería y subir el número acá.
     const GAL = [8, 7, 6];
@@ -504,6 +686,8 @@ class Component extends DCLogic {
     };
   }
   componentDidMount() { this.startBen();
+    this._cyT = setTimeout(() => { if (this.isCyber() && !this.state.buyOpen) this.setState({ cyStep: 1 }); }, 5000);
+    this._buyEsc = e => { if (e.key === 'Escape' && this.state.buyOpen) { this.setState({ buyOpen: false }); document.body.style.overflow = ''; } }; window.addEventListener('keydown', this._buyEsc);
     if (document.querySelector('[data-stark-assets]')) { this._heroBand = null; this.forceUpdate(); }
     { const el = this.appRef.current; const vids = el ? [...el.querySelectorAll('video.stark-vid')] : [];
       const rm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -517,7 +701,7 @@ class Component extends DCLogic {
       else { vids.forEach(v => v.pause()); this._vidIO = new IntersectionObserver(es => es.forEach(e => { const v = e.target; if (e.isIntersecting) { const pr = v.play(); if (pr && pr.catch) pr.catch(() => {}); } else v.pause(); }), { root: el, threshold: 0.6 }); vids.forEach(v => this._vidIO.observe(v)); } }
     const el = this.appRef.current;
     if (el && 'IntersectionObserver' in window) { const arts = [...el.querySelectorAll('article')]; this._appIO = new IntersectionObserver(es => { const seen = { ...(this.state.appSeen || {}) }; let ch = false; es.forEach(e => { const j = arts.indexOf(e.target); if (e.isIntersecting && j >= 0 && !seen[j]) { seen[j] = true; ch = true; } }); if (ch) this.setState({ appSeen: seen }); }, { threshold: 0.25 }); arts.forEach(a => this._appIO.observe(a)); } else this.setState({ appSeen: { 0: 1, 1: 1, 2: 1, 3: 1, 4: 1, 5: 1 } }); this._rs = () => this.setState({ w: window.innerWidth }); window.addEventListener('resize', this._rs); }
-  componentWillUnmount() { clearInterval(this._benT); if (this._vidIO) this._vidIO.disconnect(); if (this._appIO) this._appIO.disconnect(); window.removeEventListener('resize', this._rs); }
+  componentWillUnmount() { clearInterval(this._benT); clearTimeout(this._cyT); window.removeEventListener('keydown', this._buyEsc); if (this._vidIO) this._vidIO.disconnect(); if (this._appIO) this._appIO.disconnect(); window.removeEventListener('resize', this._rs); }
   startBen() {
     clearInterval(this._benT);
     this._benT = setInterval(() => { this._benTick = (this._benTick || 0) + 1; this.setState(s => ({ ben: ((s.ben || 0) + 1) % (this._benN || 6) })); }, 5000);
@@ -534,7 +718,7 @@ class Component extends DCLogic {
       ['Producto', '¿Es resistente al agua?', 'Sí. Podés usarla en la ducha y mientras entrenás sin sacártela.'],
       ['Producto', '¿Cuánto dura la batería?', 'Tiene batería de larga duración para que la uses varios días, incluso de noche, sin estar cargándola todo el tiempo.'],
       ['Producto', '¿Por qué no tiene pantalla?', 'Para que no te distraiga. La pulsera mide todo el día y ves tus datos en la app cuando quieras.'],
-      ['Compra', '¿Cómo pago?', 'En nuestra tienda online, con 10% OFF o en 3 cuotas sin interés.'],
+      ['Compra', '¿Cómo pago?', 'En nuestra tienda online, con 10% OFF o en ' + ((this.props.cyberMode || 'auto') === 'on' || ((this.props.cyberMode || 'auto') === 'auto' && Date.now() < CYBER_END) ? '6' : '3') + ' cuotas sin interés.'],
       ['Envío y garantía', '¿Hacen envíos a todo el país?', 'Sí, el envío es gratis a toda Argentina.'],
       ['Envío y garantía', '¿Qué pasa si no me convence?', 'Tenés 30 días de garantía. Si ya la usaste, tenés 10 días para devolverla.']
     ];
@@ -555,7 +739,10 @@ class Component extends DCLogic {
     ];
     this._benN = BEN.length;
     const ben = this.state.ben || 0;
-    const msgs = ['10% OFF comprando en la web', '3 cuotas sin interés', 'Envío gratis a todo el país', '30 días de garantía'];
+    const mode = this.props.cyberMode || 'auto';
+    const cyberOn = mode === 'on' || (mode === 'auto' && Date.now() < CYBER_END);
+    const msgs = cyberOn ? ['CYBER MONDAY · Hasta 40% OFF', '6 cuotas sin interés', '2da pulsera al 30% OFF · 3ra al 40% OFF', '10% OFF comprando en la web', 'Envío gratis a todo el país', '30 días de garantía'] : ['10% OFF comprando en la web', '3 cuotas sin interés', 'Envío gratis a todo el país', '30 días de garantía'];
+    if (!this._cyberCd) this._cyberCd = React.createElement(CyberCountdown, { end: CYBER_END, onEnd: () => this.forceUpdate() });
     const group = k => h('div', { key: k, style: { display: 'flex', gap: 48, paddingRight: 48, flex: 'none' } },
       ...[0, 1, 2].flatMap(r => msgs.map((m, i) => h('span', { key: r + '-' + i, style: { display: 'flex', gap: 48 } }, m, h('span', { 'aria-hidden': true }, '•')))));
     const marquee = this._marquee || (this._marquee = h('div', { style: { display: 'flex', width: 'max-content', animation: 'starkMarquee 40s linear infinite' } }, group('a'), group('b')));
@@ -595,6 +782,41 @@ class Component extends DCLogic {
       waOpen: !!this.state.waOpen, waArrow: this.state.waOpen ? '↑' : '↓',
       toggleWa: () => this.setState(s => ({ waOpen: !s.waOpen })),
       showPromo: this.props.showPromo ?? true,
+      ...(() => {
+        const fmt = v => (v = Math.round(v * 100) / 100, '$' + v.toLocaleString('es-AR', { minimumFractionDigits: Number.isInteger(v) ? 0 : 2, maximumFractionDigits: 2 }));
+        const P = 85000, q = this.state.buyQty || 1;
+        const total = k => cyberOn ? [P, P * 1.7, P * 2.3][k - 1] : P * k;
+        const saves = cyberOn ? ['', 'Ahorrás ' + fmt(P * 0.3) + ' · 2da al 30% OFF', 'Ahorrás ' + fmt(P * 0.7) + ' · 2da al 30% + 3ra al 40% OFF'] : ['', '', ''];
+        const close = () => { this.setState({ buyOpen: false }); document.body.style.overflow = ''; };
+        return {
+          buyOpen: !!this.state.buyOpen,
+          openBuy: e => { e.preventDefault(); this.setState({ buyOpen: true, buyQty: 1, menu: false }); document.body.style.overflow = 'hidden'; },
+          closeBuy: close, closeBuyBg: e => { if (e.target === e.currentTarget) close(); },
+          buyOpts: [1, 2, 3].map(k => ({ label: k === 1 ? '1 pulsera' : k + ' pulseras', price: fmt(total(k)), old: k > 1 && cyberOn ? fmt(P * k) : '', save: saves[k - 1], badge: k === 2 && cyberOn, on: q === k ? 'true' : 'false', ring: q === k ? '#1f62d8' : 'var(--color-divider)', bg: q === k ? '#0d2247' : 'transparent', pick: () => this.setState({ buyQty: k }) })),
+          buyUrl: 'https://starkband.mitiendanube.com/cart-link/1521860745-' + q,
+          buyTotal: fmt(total(q)),
+          buyCuotas: (cyberOn ? '6 cuotas sin interés de ' + fmt(Math.round(total(q) / 6 * 100) / 100) + ' con tarjetas adheridas' : '3 cuotas sin interés de ' + fmt(Math.round(total(q) / 3 * 100) / 100)) + ' · o ' + fmt(total(q) * 0.95) + ' por transferencia (5% OFF)'
+        };
+      })(),
+      ...(() => {
+        const st = this.state.cyStep || 0, code = this.props.cyberCode || 'CYBERSTARK', gift = this.props.cyberGift || '';
+        const close = () => this.setState({ cyStep: 0 });
+        return {
+          cyOpen: st > 0 && cyberOn, cyS1: st === 1, cyS2: st === 2, cyS3: st === 3,
+          cyPad: this.state.w > 760 ? '32px' : '16px 20px 24px', cyH: this.state.w > 760 ? '34px' : '26px',
+          cyGiftTxt: gift ? ': ' + gift : '', cyCode: code,
+          cyClose: close, cyCloseBg: e => { if (e.target === e.currentTarget) close(); },
+          cyNext: () => this.setState({ cyStep: 2 }),
+          cyEmail: this.state.cyEmail || '', cyErr: !!this.state.cyErr, cyEmailRing: this.state.cyErr ? '#ff8f7a' : '#f2f4f7',
+          cyEmailChange: e => this.setState({ cyEmail: e.target.value, cyErr: false }),
+          cyBtnTxt: this.state.cySending ? 'ENVIANDO…' : 'RECIBIR MI CÓDIGO',
+          cySubmit: e => { e.preventDefault(); this.cySave(); },
+          cyCopyTxt: this.state.cyCopied ? '¡Copiado!' : 'Copiar',
+          cyCopy: () => { try { navigator.clipboard.writeText(code); } catch (_) {} this.setState({ cyCopied: true }); },
+          cyBuy: () => { this.setState({ cyStep: 0, buyOpen: true, buyQty: 1 }); document.body.style.overflow = 'hidden'; }
+        };
+      })(),
+      cyberOn, cyberOff: !cyberOn, cyberCountdown: this._cyberCd, cuotasN: cyberOn ? 6 : 3,
       ...gal, colors, colorName: colors[this.state.color].name, faqs, faqCats,
       stats: [
         { icon: '⏱️', big: 'Monitoreo 24/7', small: 'Día y noche' },
