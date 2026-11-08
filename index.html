@@ -626,7 +626,7 @@ a:hover{color:#b9cffa}
 </div>
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{&quot;showPromo&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;},&quot;cyberMode&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;auto&quot;,&quot;on&quot;,&quot;off&quot;],&quot;default&quot;:&quot;auto&quot;,&quot;tsType&quot;:&quot;'auto'|'on'|'off'&quot;,&quot;section&quot;:&quot;Cyber Monday&quot;},&quot;cyberCode&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;CYBERSTARK&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Cartel de regalo&quot;},&quot;cyberGift&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Cartel de regalo&quot;},&quot;leadEndpoint&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Cartel de regalo&quot;}}">
-const CYBER_END = Date.UTC(2026, 10, 7, 3, 0, 0); // 7/11/2026 00:00 hora Argentina
+const CYBER_END = Date.UTC(2026, 10, 13, 3, 0, 0); // hasta el 12/11/2026 23:59 hora Argentina
 const CyberCountdown = ({ end, onEnd }) => {
   const [t, setT] = React.useState(() => end - Date.now());
   React.useEffect(() => { const id = setInterval(() => { const r = end - Date.now(); setT(r); if (r <= 0) { clearInterval(id); onEnd && onEnd(); } }, 1000); return () => clearInterval(id); }, [end]);
