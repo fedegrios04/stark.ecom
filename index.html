@@ -673,6 +673,7 @@ class Component extends DCLogic {
       if (url.includes('script.google.com')) await fetch(url, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(lead) });
       else await fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' }, body: JSON.stringify(lead) });
     } catch (_) {} }
+    if (window.fbq) fbq('track', 'Lead', { content_name: 'popup-cyber' });
     this.setState({ cySending: false, cyStep: 3 });
   }
   galData() {
