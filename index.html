@@ -4,6 +4,19 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="./support.js"></script>
+<!-- Meta Pixel (mismo píxel que Tiendanube) -->
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+document,'script','https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1327695059340345');
+fbq('track', 'PageView');
+fbq('track', 'ViewContent', { content_name: 'Pulsera inteligente STARK', content_type: 'product', value: 85000, currency: 'ARS' });
+</script>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1327695059340345&ev=PageView&noscript=1"/></noscript>
+<!-- Fin Meta Pixel -->
 </head>
 <body>
 <x-dc>
@@ -524,7 +537,7 @@ a:hover{color:#b9cffa}
 </sc-for>
 </div>
 <div style="display:flex;flex-direction:column;gap:10px;padding:0 20px 20px">
-<a class="btn btn-primary" href="{{ buyUrl }}" style="padding:16px 20px;font-size:17px;justify-content:space-between;min-height:44px"><span>Ir al carrito — {{ buyTotal }}</span><span>→</span></a>
+<a class="btn btn-primary" href="{{ buyUrl }}" onClick="{{ goCart }}" style="padding:16px 20px;font-size:17px;justify-content:space-between;min-height:44px"><span>Ir al carrito — {{ buyTotal }}</span><span>→</span></a>
 <div style="font-size:13px;opacity:0.8;line-height:1.4">{{ buyCuotas }}</div>
 </div>
 </div>
@@ -790,11 +803,12 @@ class Component extends DCLogic {
         const close = () => { this.setState({ buyOpen: false }); document.body.style.overflow = ''; };
         return {
           buyOpen: !!this.state.buyOpen,
-          openBuy: e => { e.preventDefault(); this.setState({ buyOpen: true, buyQty: 1, menu: false }); document.body.style.overflow = 'hidden'; },
+          openBuy: e => { e.preventDefault(); if (window.fbq) fbq('trackCustom', 'ClickComprar'); this.setState({ buyOpen: true, buyQty: 1, menu: false }); document.body.style.overflow = 'hidden'; },
           closeBuy: close, closeBuyBg: e => { if (e.target === e.currentTarget) close(); },
           buyOpts: [1, 2, 3].map(k => ({ label: k === 1 ? '1 pulsera' : k + ' pulseras', price: fmt(total(k)), old: k > 1 && cyberOn ? fmt(P * k) : '', save: saves[k - 1], badge: k === 2 && cyberOn, on: q === k ? 'true' : 'false', ring: q === k ? '#1f62d8' : 'var(--color-divider)', bg: q === k ? '#0d2247' : 'transparent', pick: () => this.setState({ buyQty: k }) })),
           buyUrl: 'https://starkband.mitiendanube.com/cart-link/1521860745-' + q,
           buyTotal: fmt(total(q)),
+          goCart: e => { const url = 'https://starkband.mitiendanube.com/cart-link/1521860745-' + q; if (!window.fbq) return; e.preventDefault(); fbq('trackCustom', 'IrAlCarrito', { cantidad: q, value: total(q), currency: 'ARS' }); setTimeout(() => { window.location.href = url; }, 300); },
           buyCuotas: (cyberOn ? '6 cuotas sin interés de ' + fmt(Math.round(total(q) / 6 * 100) / 100) + ' con tarjetas adheridas' : '3 cuotas sin interés de ' + fmt(Math.round(total(q) / 3 * 100) / 100)) + ' · o ' + fmt(total(q) * 0.95) + ' por transferencia (5% OFF)'
         };
       })(),
@@ -858,7 +872,7 @@ class Component extends DCLogic {
       setEmail: e => this.setState({ email: e.target.value }),
       subscribed: this.state.subscribed,
       notSubscribed: !this.state.subscribed,
-      subscribe: e => { e.preventDefault(); this.setState({ subscribed: true }); }
+      subscribe: e => { e.preventDefault(); if (window.fbq) fbq('track', 'Lead'); this.setState({ subscribed: true }); }
     };
   }
 }
