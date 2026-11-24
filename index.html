@@ -630,7 +630,7 @@ a:hover{color:#b9cffa}
 <script type="text/x-dc" data-dc-script data-props="{&quot;showPromo&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;},&quot;cyberMode&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;auto&quot;,&quot;on&quot;,&quot;off&quot;],&quot;default&quot;:&quot;auto&quot;,&quot;tsType&quot;:&quot;'auto'|'on'|'off'&quot;,&quot;section&quot;:&quot;Cyber Monday&quot;},&quot;cyberCode&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;CYBERSTARK&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Cartel de regalo&quot;},&quot;cyberGift&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Cartel de regalo&quot;},&quot;leadEndpoint&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Cartel de regalo&quot;}}">
 // Eventos de promo (horario Argentina = UTC-3). Cada uno se muestra solo hasta su "end".
 const PROMO_EVENTS = [
-  { id: 'bw', name: 'Black Week', end: Date.UTC(2026, 10, 27, 3, 0, 0), d2: 0.20, d3: 0.35, max: '35%', accent: '#C6FF3D', web: 'assets/blackweek-banner.png', mob: 'assets/blackweek-banner-mobile.png' }, // hasta el 26/11/2026 23:59
+  { id: 'bw', name: 'Black Week', end: Date.UTC(2026, 10, 27, 3, 0, 0), d2: 0.20, d3: 0.35, t3: 0.18, max: '35%', accent: '#C6FF3D', web: 'assets/blackweek-banner.png', mob: 'assets/blackweek-banner-mobile.png' }, // hasta el 26/11/2026 23:59
   { id: 'bf', name: 'Black Friday', end: Date.UTC(2026, 11, 1, 3, 0, 0), d2: 0.40, d3: 0.65, max: '65%', accent: '#FF4D2E', web: 'assets/blackfriday-banner.png', mob: 'assets/blackfriday-banner-mobile.png', popup: { code: 'BLACKSTARK' } } // del 27/11 al 30/11/2026 23:59
 ];
 const promoEvent = mode => { if (mode === 'off') return null; const now = Date.now(); return PROMO_EVENTS.find(e => now < e.end) || (mode === 'on' ? PROMO_EVENTS[PROMO_EVENTS.length - 1] : null); };
@@ -796,8 +796,9 @@ class Component extends DCLogic {
       ...(() => {
         const fmt = v => (v = Math.round(v * 100) / 100, '$' + v.toLocaleString('es-AR', { minimumFractionDigits: Number.isInteger(v) ? 0 : 2, maximumFractionDigits: 2 }));
         const P = 85000, q = this.state.buyQty || 1;
-        const total = k => ev ? [P, P * (2 - ev.d2), P * (3 - ev.d2 - ev.d3)][k - 1] : P * k;
-        const saves = ev ? ['', 'Ahorrás ' + fmt(P * ev.d2) + ' · 2da al ' + pct(ev.d2), 'Ahorrás ' + fmt(P * (ev.d2 + ev.d3)) + ' · 2da al ' + Math.round(ev.d2 * 100) + '% + 3ra al ' + pct(ev.d3)] : ['', '', ''];
+        // t3: % que cobra Tiendanube sobre el total al llevar 3 (si está, manda ese precio)
+        const total = k => ev ? [P, P * (2 - ev.d2), ev.t3 ? P * 3 * (1 - ev.t3) : P * (3 - ev.d2 - ev.d3)][k - 1] : P * k;
+        const saves = ev ? ['', 'Ahorrás ' + fmt(P * ev.d2) + ' · 2da al ' + pct(ev.d2), 'Ahorrás ' + fmt(P * 3 - total(3)) + ' · 2da al ' + Math.round(ev.d2 * 100) + '% + 3ra al ' + pct(ev.d3)] : ['', '', ''];
         const close = () => { this.setState({ buyOpen: false }); document.body.style.overflow = ''; };
         return {
           buyOpen: !!this.state.buyOpen,
