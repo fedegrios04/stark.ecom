@@ -87,30 +87,19 @@ a:hover{color:#b9cffa}
 <div style="font-family:var(--font-body);color:var(--color-text);background:var(--color-bg);min-height:100vh">
 
 <sc-if value="{{ cyberOn }}" hint-placeholder-val="{{ true }}">
-<section data-screen-label="Cyber Monday" aria-label="Cyber Monday" style="background:#0b1733;color:#f2f4f7;border-bottom:2px solid #c6ff3d">
+<section data-screen-label="{{ evName }}" aria-label="{{ evName }}" style="background:#0a0a0a;color:#f5f5f5;border-bottom:2px solid {{ evAccent }}">
 <sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ true }}">
-<a href="https://starkband.mitiendanube.com/cart-link/1521860745-1" onClick="{{ openBuy }}" aria-label="Cyber Monday: 2da pulsera al 30% OFF, 3ra al 40% OFF, 6 cuotas sin interés. Comprar ahora" style="display:block;max-width:1920px;margin:0 auto">
-<img src="assets/cyber-banner.png" alt="Cyber Monday STARK: hasta 40% OFF. Llevando 2 pulseras la 2da al 30% OFF, llevando 3 la 3ra al 40% OFF. 10% OFF en la web, 5% OFF extra por transferencia, 6 cuotas sin interés." style="display:block;width:100%;height:auto">
+<a href="https://starkband.mitiendanube.com/cart-link/1521860745-1" onClick="{{ openBuy }}" aria-label="{{ evAria }}" style="display:block;max-width:1920px;margin:0 auto">
+<img src="{{ evWeb }}" alt="{{ evAria }}" style="display:block;width:100%;height:auto">
 </a>
 </sc-if>
 <sc-if value="{{ isMobile }}" hint-placeholder-val="{{ false }}">
-<a href="https://starkband.mitiendanube.com/cart-link/1521860745-1" onClick="{{ openBuy }}" style="display:flex;flex-direction:column;gap:16px;padding:28px 20px 20px;color:inherit;text-decoration:none">
-<div style="display:flex;align-items:center;gap:12px"><span style="font-family:var(--font-heading);font-weight:800;font-size:18px;letter-spacing:0.14em">STARK</span><span style="background:#c6ff3d;color:#0b1733;font-size:11px;font-weight:800;letter-spacing:0.14em;padding:5px 10px">CYBER MONDAY</span></div>
-<div style="font-family:var(--font-heading);font-weight:900;font-size:44px;line-height:0.95;letter-spacing:-0.02em;text-transform:uppercase">Cyber Monday<br><span style="color:#c6ff3d">Hasta 40% OFF</span></div>
-<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
-<div style="border:2px solid #24407a;background:#12244a;padding:12px;display:flex;flex-direction:column;gap:4px"><span style="font-size:10px;font-weight:800;letter-spacing:0.12em;color:#c6ff3d">LLEVANDO 2</span><span style="font-family:var(--font-heading);font-weight:900;font-size:22px;line-height:1">LA 2ª AL 30% OFF</span></div>
-<div style="background:#c6ff3d;color:#0b1733;padding:12px;display:flex;flex-direction:column;gap:4px"><span style="font-size:10px;font-weight:800;letter-spacing:0.12em">LLEVANDO 3</span><span style="font-family:var(--font-heading);font-weight:900;font-size:22px;line-height:1">LA 3ª AL 40% OFF</span></div>
-</div>
-<div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px">
-<div style="border-top:2px solid #c6ff3d;padding-top:8px"><div style="font-family:var(--font-heading);font-weight:900;font-size:17px">10% OFF</div><div style="font-size:11px;opacity:0.8">en la web</div></div>
-<div style="border-top:2px solid #c6ff3d;padding-top:8px"><div style="font-family:var(--font-heading);font-weight:900;font-size:17px">+5% OFF</div><div style="font-size:11px;opacity:0.8">por transferencia</div></div>
-<div style="border-top:2px solid #c6ff3d;padding-top:8px"><div style="font-family:var(--font-heading);font-weight:900;font-size:17px">6 cuotas</div><div style="font-size:11px;opacity:0.8">sin interés</div></div>
-</div>
-<span style="display:flex;justify-content:space-between;align-items:center;background:#f2f4f7;color:#0b1733;font-weight:800;letter-spacing:0.1em;font-size:14px;padding:14px 18px;min-height:44px">COMPRAR AHORA <span>→</span></span>
+<a href="https://starkband.mitiendanube.com/cart-link/1521860745-1" onClick="{{ openBuy }}" aria-label="{{ evAria }}" style="display:block">
+<img src="{{ evMob }}" alt="{{ evAria }}" style="display:block;width:100%;height:auto">
 </a>
 </sc-if>
-<div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:12px 20px;padding:14px 20px;border-top:2px solid #1c2f5c">
-<span style="font-size:12px;font-weight:800;letter-spacing:0.16em;color:#c6ff3d">TERMINA EN</span>
+<div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:12px 20px;padding:14px 20px;border-top:2px solid #2e2e2e">
+<span style="font-size:12px;font-weight:800;letter-spacing:0.16em;color:{{ evAccent }}">TERMINA EN</span>
 {{ cyberCountdown }}
 <span style="font-size:13px;opacity:0.85">6 cuotas sin interés con tarjetas adheridas</span>
 </div>
@@ -345,7 +334,7 @@ a:hover{color:#b9cffa}
 </div>
 <div style="display:flex;flex-direction:column;gap:6px;font-size:15px">
 <sc-if value="{{ cyberOff }}" hint-placeholder-val="{{ false }}"><div>o <strong>3 cuotas sin interés</strong></div></sc-if>
-<sc-if value="{{ cyberOn }}" hint-placeholder-val="{{ true }}"><div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap"><span style="background:#0b1733;color:#c6ff3d;font-size:11px;font-weight:800;letter-spacing:0.12em;padding:4px 8px">CYBER MONDAY</span><span>o <strong>6 cuotas sin interés de $14.166,67</strong></span></div></sc-if>
+<sc-if value="{{ cyberOn }}" hint-placeholder-val="{{ true }}"><div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap"><span style="background:#0a0a0a;color:{{ evAccent }};font-size:11px;font-weight:800;letter-spacing:0.12em;padding:4px 8px">{{ evNameUp }}</span><span>o <strong>6 cuotas sin interés de $14.166,67</strong></span></div></sc-if>
 <div>o <strong>$80.750 por transferencia</strong> <span style="color:var(--color-accent-700);font-weight:600">(5% OFF)</span></div>
 </div>
 <div style="display:flex;flex-direction:column;gap:10px;border-top:2px solid var(--color-divider);padding-top:20px">
@@ -365,8 +354,8 @@ a:hover{color:#b9cffa}
 </div>
 <a class="btn btn-primary" href="https://starkband.mitiendanube.com/cart-link/1521860745-1" onClick="{{ openBuy }}" style="padding:16px 20px;font-size:17px;justify-content:space-between">Comprar ahora <span>→</span></a>
 <sc-if value="{{ cyberOn }}" hint-placeholder-val="{{ true }}">
-<div style="display:flex;flex-direction:column;gap:6px;background:#0b1733;color:#f2f4f7;padding:14px 16px;font-size:13px;line-height:1.4">
-<div><strong style="color:#c6ff3d">Cyber Monday:</strong> 6 cuotas sin interés con tarjetas adheridas · 2da pulsera al 30% OFF · 3ra al 40% OFF</div>
+<div style="display:flex;flex-direction:column;gap:6px;background:#0a0a0a;color:#f5f5f5;padding:14px 16px;font-size:13px;line-height:1.4">
+<div><strong style="color:{{ evAccent }}">{{ evName }}:</strong> 6 cuotas sin interés con tarjetas adheridas · {{ evPromo }}</div>
 </div>
 </sc-if>
 </div>
@@ -520,7 +509,7 @@ a:hover{color:#b9cffa}
 <div style="width:100%;max-width:480px;max-height:calc(100vh - 32px);overflow-y:auto;background:var(--color-bg);color:var(--color-text);border:2px solid var(--color-divider);display:flex;flex-direction:column">
 <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:20px 20px 16px;border-bottom:2px solid var(--color-divider)">
 <div style="display:flex;flex-direction:column;gap:4px">
-<sc-if value="{{ cyberOn }}" hint-placeholder-val="{{ true }}"><span style="align-self:flex-start;background:#c6ff3d;color:#0b1733;font-size:11px;font-weight:800;letter-spacing:0.12em;padding:4px 8px">CYBER MONDAY</span></sc-if>
+<sc-if value="{{ cyberOn }}" hint-placeholder-val="{{ true }}"><span style="align-self:flex-start;background:{{ evAccent }};color:#0a0a0a;font-size:11px;font-weight:800;letter-spacing:0.12em;padding:4px 8px">{{ evNameUp }}</span></sc-if>
 <h3 style="font-family:var(--font-heading);font-weight:800;font-size:24px;letter-spacing:-0.02em;margin:0">¿Cuántas pulseras querés?</h3>
 </div>
 <button onClick="{{ closeBuy }}" aria-label="Cerrar" style="flex:none;width:44px;height:44px;border:2px solid var(--color-divider);background:transparent;color:inherit;font-size:20px;line-height:1;cursor:pointer;font-family:inherit">✕</button>
@@ -639,16 +628,21 @@ a:hover{color:#b9cffa}
 </div>
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{&quot;showPromo&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;},&quot;cyberMode&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;auto&quot;,&quot;on&quot;,&quot;off&quot;],&quot;default&quot;:&quot;auto&quot;,&quot;tsType&quot;:&quot;'auto'|'on'|'off'&quot;,&quot;section&quot;:&quot;Cyber Monday&quot;},&quot;cyberCode&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;CYBERSTARK&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Cartel de regalo&quot;},&quot;cyberGift&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Cartel de regalo&quot;},&quot;leadEndpoint&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Cartel de regalo&quot;}}">
-const CYBER_END = Date.UTC(2026, 10, 13, 3, 0, 0); // hasta el 12/11/2026 23:59 hora Argentina
-const CyberCountdown = ({ end, onEnd }) => {
+// Eventos de promo (horario Argentina = UTC-3). Cada uno se muestra solo hasta su "end".
+const PROMO_EVENTS = [
+  { id: 'bw', name: 'Black Week', end: Date.UTC(2026, 10, 27, 3, 0, 0), d2: 0.20, d3: 0.35, max: '35%', accent: '#C6FF3D', web: 'assets/blackweek-banner.png', mob: 'assets/blackweek-banner-mobile.png' }, // hasta el 26/11/2026 23:59
+  { id: 'bf', name: 'Black Friday', end: Date.UTC(2026, 11, 1, 3, 0, 0), d2: 0.40, d3: 0.65, max: '65%', accent: '#FF4D2E', web: 'assets/blackfriday-banner.png', mob: 'assets/blackfriday-banner-mobile.png' } // del 27/11 al 30/11/2026 23:59
+];
+const promoEvent = mode => { if (mode === 'off') return null; const now = Date.now(); return PROMO_EVENTS.find(e => now < e.end) || (mode === 'on' ? PROMO_EVENTS[PROMO_EVENTS.length - 1] : null); };
+const CyberCountdown = ({ end, onEnd, accent }) => {
   const [t, setT] = React.useState(() => end - Date.now());
   React.useEffect(() => { const id = setInterval(() => { const r = end - Date.now(); setT(r); if (r <= 0) { clearInterval(id); onEnd && onEnd(); } }, 1000); return () => clearInterval(id); }, [end]);
   const r = Math.max(0, t), d = Math.floor(r / 864e5), hh = Math.floor(r / 36e5) % 24, mm = Math.floor(r / 6e4) % 60, ss = Math.floor(r / 1e3) % 60;
   const p = n => String(n).padStart(2, '0');
-  const box = (v, l) => React.createElement('span', { key: l, style: { display: 'flex', flexDirection: 'column', alignItems: 'center', minWidth: 48, padding: '6px 8px', background: '#c6ff3d', color: '#0b1733' } },
+  const box = (v, l) => React.createElement('span', { key: l, style: { display: 'flex', flexDirection: 'column', alignItems: 'center', minWidth: 48, padding: '6px 8px', background: accent || '#c6ff3d', color: '#0a0a0a' } },
     React.createElement('span', { style: { fontFamily: 'var(--font-heading)', fontWeight: 900, fontSize: 22, lineHeight: 1, fontVariantNumeric: 'tabular-nums' } }, v),
     React.createElement('span', { style: { fontSize: 9, fontWeight: 800, letterSpacing: '0.12em', marginTop: 3 } }, l));
-  return React.createElement('span', { role: 'timer', 'aria-label': 'Tiempo restante de Cyber Monday', style: { display: 'flex', gap: 6 } }, box(p(d), 'DÍAS'), box(p(hh), 'HS'), box(p(mm), 'MIN'), box(p(ss), 'SEG'));
+  return React.createElement('span', { role: 'timer', 'aria-label': 'Tiempo restante de la promo', style: { display: 'flex', gap: 6 } }, box(p(d), 'DÍAS'), box(p(hh), 'HS'), box(p(mm), 'MIN'), box(p(ss), 'SEG'));
 };
 const A = (() => { let map = null; return p => { if (!map) { const el = typeof document !== 'undefined' && document.querySelector('[data-stark-assets]'); if (!el) return p; map = {}; el.querySelectorAll('img[data-a]').forEach(i => { map[i.getAttribute('data-a')] = i.getAttribute('src'); }); } return map[p] || p; }; })();
 class Component extends DCLogic {
@@ -661,7 +655,7 @@ class Component extends DCLogic {
   appScroll = (e) => { const el = e.currentTarget; const a = el.querySelectorAll('article'); if (a.length < 2 || this._appLock) return;
     if (el.scrollLeft + el.clientWidth >= el.scrollWidth - 4) return;
     const w = a[1].offsetLeft - a[0].offsetLeft; const p = Math.round(el.scrollLeft / w); if (p !== (this.state.app || 0)) this.setState({ app: p }); };
-  isCyber() { const m = this.props.cyberMode || 'auto'; return m === 'on' || (m === 'auto' && Date.now() < CYBER_END); }
+  isCyber() { const e = promoEvent(this.props.cyberMode || 'auto'); return !!(e && e.popup); }
   async cySave() {
     const email = (this.state.cyEmail || '').trim();
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) { this.setState({ cyErr: true }); return; }
@@ -732,7 +726,7 @@ class Component extends DCLogic {
       ['Producto', '¿Es resistente al agua?', 'Sí. Podés usarla en la ducha y mientras entrenás sin sacártela.'],
       ['Producto', '¿Cuánto dura la batería?', 'Tiene batería de larga duración para que la uses varios días, incluso de noche, sin estar cargándola todo el tiempo.'],
       ['Producto', '¿Por qué no tiene pantalla?', 'Para que no te distraiga. La pulsera mide todo el día y ves tus datos en la app cuando quieras.'],
-      ['Compra', '¿Cómo pago?', 'En nuestra tienda online, con 10% OFF o en ' + ((this.props.cyberMode || 'auto') === 'on' || ((this.props.cyberMode || 'auto') === 'auto' && Date.now() < CYBER_END) ? '6' : '3') + ' cuotas sin interés.'],
+      ['Compra', '¿Cómo pago?', 'En nuestra tienda online, con 10% OFF o en ' + (promoEvent(this.props.cyberMode || 'auto') ? '6' : '3') + ' cuotas sin interés.'],
       ['Envío y garantía', '¿Hacen envíos a todo el país?', 'Sí, el envío es gratis a toda Argentina.'],
       ['Envío y garantía', '¿Qué pasa si no me convence?', 'Tenés 30 días de garantía. Si ya la usaste, tenés 10 días para devolverla.']
     ];
@@ -753,10 +747,13 @@ class Component extends DCLogic {
     ];
     this._benN = BEN.length;
     const ben = this.state.ben || 0;
-    const mode = this.props.cyberMode || 'auto';
-    const cyberOn = mode === 'on' || (mode === 'auto' && Date.now() < CYBER_END);
-    const msgs = cyberOn ? ['CYBER MONDAY · Hasta 40% OFF', '6 cuotas sin interés', '2da pulsera al 30% OFF · 3ra al 40% OFF', '10% OFF comprando en la web', 'Envío gratis a todo el país', '30 días de garantía'] : ['10% OFF comprando en la web', '3 cuotas sin interés', 'Envío gratis a todo el país', '30 días de garantía'];
-    if (!this._cyberCd) this._cyberCd = React.createElement(CyberCountdown, { end: CYBER_END, onEnd: () => this.forceUpdate() });
+    const ev = promoEvent(this.props.cyberMode || 'auto');
+    const cyberOn = !!ev;
+    const pct = x => Math.round(x * 100) + '% OFF';
+    const evPromo = ev ? '2da pulsera al ' + pct(ev.d2) + ' · 3ra al ' + pct(ev.d3) : '';
+    const msgs = ev ? [ev.name.toUpperCase() + ' · Hasta ' + ev.max + ' OFF', '6 cuotas sin interés', evPromo, '10% OFF comprando en la web', 'Envío gratis a todo el país', '30 días de garantía'] : ['10% OFF comprando en la web', '3 cuotas sin interés', 'Envío gratis a todo el país', '30 días de garantía'];
+    const evKey = ev ? ev.id : 'none';
+    if (this._evKey !== evKey) { this._evKey = evKey; this._marquee = null; this._cyberCd = ev ? React.createElement(CyberCountdown, { key: ev.id, end: ev.end, accent: ev.accent, onEnd: () => this.forceUpdate() }) : null; }
     const group = k => h('div', { key: k, style: { display: 'flex', gap: 48, paddingRight: 48, flex: 'none' } },
       ...[0, 1, 2].flatMap(r => msgs.map((m, i) => h('span', { key: r + '-' + i, style: { display: 'flex', gap: 48 } }, m, h('span', { 'aria-hidden': true }, '•')))));
     const marquee = this._marquee || (this._marquee = h('div', { style: { display: 'flex', width: 'max-content', animation: 'starkMarquee 40s linear infinite' } }, group('a'), group('b')));
@@ -799,8 +796,8 @@ class Component extends DCLogic {
       ...(() => {
         const fmt = v => (v = Math.round(v * 100) / 100, '$' + v.toLocaleString('es-AR', { minimumFractionDigits: Number.isInteger(v) ? 0 : 2, maximumFractionDigits: 2 }));
         const P = 85000, q = this.state.buyQty || 1;
-        const total = k => cyberOn ? [P, P * 1.7, P * 2.3][k - 1] : P * k;
-        const saves = cyberOn ? ['', 'Ahorrás ' + fmt(P * 0.3) + ' · 2da al 30% OFF', 'Ahorrás ' + fmt(P * 0.7) + ' · 2da al 30% + 3ra al 40% OFF'] : ['', '', ''];
+        const total = k => ev ? [P, P * (2 - ev.d2), P * (3 - ev.d2 - ev.d3)][k - 1] : P * k;
+        const saves = ev ? ['', 'Ahorrás ' + fmt(P * ev.d2) + ' · 2da al ' + pct(ev.d2), 'Ahorrás ' + fmt(P * (ev.d2 + ev.d3)) + ' · 2da al ' + Math.round(ev.d2 * 100) + '% + 3ra al ' + pct(ev.d3)] : ['', '', ''];
         const close = () => { this.setState({ buyOpen: false }); document.body.style.overflow = ''; };
         return {
           buyOpen: !!this.state.buyOpen,
@@ -817,7 +814,7 @@ class Component extends DCLogic {
         const st = this.state.cyStep || 0, code = this.props.cyberCode || 'CYBERSTARK', gift = this.props.cyberGift || '';
         const close = () => this.setState({ cyStep: 0 });
         return {
-          cyOpen: st > 0 && cyberOn, cyS1: st === 1, cyS2: st === 2, cyS3: st === 3,
+          cyOpen: st > 0 && cyberOn && !!ev.popup, cyS1: st === 1, cyS2: st === 2, cyS3: st === 3,
           cyPad: this.state.w > 760 ? '32px' : '16px 20px 24px', cyH: this.state.w > 760 ? '34px' : '26px',
           cyGiftTxt: gift ? ': ' + gift : '', cyCode: code,
           cyClose: close, cyCloseBg: e => { if (e.target === e.currentTarget) close(); },
@@ -831,7 +828,10 @@ class Component extends DCLogic {
           cyBuy: () => { this.setState({ cyStep: 0, buyOpen: true, buyQty: 1 }); document.body.style.overflow = 'hidden'; }
         };
       })(),
-      cyberOn, cyberOff: !cyberOn, cyberCountdown: this._cyberCd, cuotasN: cyberOn ? 6 : 3,
+      cyberOn, cyberOff: !cyberOn, cyberCountdown: this._cyberCd,
+      evName: ev ? ev.name : '', evNameUp: ev ? ev.name.toUpperCase() : '', evAccent: ev ? ev.accent : '#c6ff3d', evPromo,
+      evWeb: ev ? ev.web : '', evMob: ev ? ev.mob : '',
+      evAria: ev ? ev.name + ' STARK: hasta ' + ev.max + ' OFF. ' + evPromo + '. 10% OFF en la web, 5% OFF extra por transferencia, 6 cuotas sin interés. Comprar ahora' : '', cuotasN: cyberOn ? 6 : 3,
       ...gal, colors, colorName: colors[this.state.color].name, faqs, faqCats,
       stats: [
         { icon: '⏱️', big: 'Monitoreo 24/7', small: 'Día y noche' },
